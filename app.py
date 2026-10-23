@@ -19,11 +19,7 @@ def health():
 
 
 def run_bot():
-    try:
-        start_bot()
-    except Exception as exc:
-        print(f"Telegram bot startup failed: {exc}")
-        raise
+    start_bot()
 
 
 if __name__ == "__main__":
