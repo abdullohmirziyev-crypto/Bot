@@ -1,1 +1,2 @@
 -r Jannat_Makon_Bot/requirements.txt
+Flask>=3.0.0
