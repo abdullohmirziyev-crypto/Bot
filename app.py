@@ -18,11 +18,15 @@ def health():
     return {"status": "ok"}
 
 
-def run_bot_in_background():
-    start_bot()
+def run_bot():
+    try:
+        start_bot()
+    except Exception as exc:
+        print(f"Telegram bot startup failed: {exc}")
+        raise
 
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", "10000"))
-    threading.Thread(target=run_bot_in_background, daemon=True).start()
+    threading.Thread(target=run_bot, daemon=True).start()
     app.run(host="0.0.0.0", port=port)
