@@ -1,5 +1,5 @@
 import os
-import threading
+from threading import Thread
 
 from flask import Flask
 
@@ -18,11 +18,12 @@ def health():
     return {"status": "ok"}
 
 
-def run_bot():
-    start_bot()
+def run_web_server():
+    port = int(os.environ.get("PORT", "10000"))
+    app.run(host="0.0.0.0", port=port, use_reloader=False)
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", "10000"))
-    threading.Thread(target=run_bot, daemon=True).start()
-    app.run(host="0.0.0.0", port=port)
+    web_thread = Thread(target=run_web_server, daemon=True)
+    web_thread.start()
+    start_bot()
